@@ -31,7 +31,6 @@ class CMSFormPlugin(CMSPluginBase):
     model = FormPlugin
     form = CMSFormPluginForm
     name = _("Form")
-    render_template = "form/form.html"
 
     @classmethod
     def form_post(cls, request, instance_id):
@@ -136,6 +135,10 @@ class CMSFormPlugin(CMSPluginBase):
             'submit_caption': instance.submit_caption,
         })
         return context
-
+    
+    def get_render_template(self, context, instance, placeholder):
+        return instance.render_template
+        
+    
         
 plugin_pool.register_plugin(CMSFormPlugin)

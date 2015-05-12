@@ -63,9 +63,7 @@ class CMSFormPlugin(CMSPluginBase):
                     if hasattr(form.save, '__call__'):
                         form.save()
 
-                success_url = request.POST['success_url']
-                if hasattr(form, 'get_success_url'):
-                    success_url = form.get_success_url()
+                success_url = instance.success_url
                 
                 response = HttpResponseRedirect(
                     success_url

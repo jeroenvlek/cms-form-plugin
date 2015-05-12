@@ -1,6 +1,6 @@
 from django.conf.urls import patterns, url
 
-from cms_plugins import CMSFormPlugin
+from .cms_plugins import CMSFormPlugin
 
 urlpatterns = patterns(
     '',

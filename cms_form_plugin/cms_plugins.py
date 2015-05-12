@@ -4,7 +4,7 @@ from cms.forms import fields
 from cms.utils import get_language_from_request
 from cms.forms.utils import get_page_choices
 
-from models import FormPlugin
+from .models import FormPlugin
 
 from django.utils.translation import ugettext as _
 from django.utils.module_loading import import_by_path

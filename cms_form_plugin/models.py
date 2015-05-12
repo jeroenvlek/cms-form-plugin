@@ -10,7 +10,7 @@ class FormPlugin(CMSPlugin):
     )
     render_template = models.CharField(
         max_length = 200,
-        choices=(('form/form.html', 'Default form',),) + settings.FORM_TEMPLATES
+        choices= settings.FORM_TEMPLATES + (('form/form.html', 'Default form',),)
     )
     success_url = models.URLField(null = True, blank = True)
     success_page = models.ForeignKey(

@@ -17,6 +17,15 @@ Installation
       ),
   )
 
+- Specify `FORM_TEMPLATES` in settings.py a tuple of tuples to be used as `choices` attribute to the plugin's `render_template` field. For example:
+  
+  FORM_TEMPLATES = (
+      (
+          'form/form.html', 
+          'Default Form Template'
+      ),
+  )
+
 - Include `cms_form_plugin.urls` in your `urlpatterns`
 - Run `manage.py migrate cms_form_plugin`
 

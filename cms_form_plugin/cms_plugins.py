@@ -15,6 +15,7 @@ from django.core.exceptions import ImproperlyConfigured
 from django.forms import ModelForm
 
 import pickle
+import codecs
 
 
 class CMSFormPluginForm(ModelForm):
@@ -85,7 +86,7 @@ class CMSFormPlugin(CMSPluginBase):
             form.invalid_url = request.POST['invalid_url']
             delattr(form, 'request')
             request.session[
-                'invalid_form_%s' % instance_id] = pickle.dumps(form)
+                'invalid_form_%s' % instance_id] = request.POST
 
         if not response:
             response = HttpResponseRedirect(
@@ -107,13 +108,12 @@ class CMSFormPlugin(CMSPluginBase):
             raise ImproperlyConfigured('Sessions must be enabled')
         
         form_class = import_by_path(instance.form_class)
-        form = request.session.get(
+        
+        form_data = request.session.get(
             'invalid_form_%s' % instance.id, None)
-
-        if form is None:
-            form = form_class()
-        else:
-            form = pickle.loads(form)
+        form = form_class(data=form_data)
+        if form_data is not None:
+            form.full_clean()
 
         setattr(form, 'request', request)
             
